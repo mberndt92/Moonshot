@@ -68,7 +68,6 @@ struct MissionView: View {
                                         Text(crew.role)
                                             .foregroundColor(.secondary)
                                     }
-                                    Divider()
                                 }
                                 .padding(.horizontal)
                             }
