@@ -39,47 +39,65 @@ struct MissionView: View {
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding()
+                    
                     VStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(height: 2)
+                            .foregroundColor(.lightBackground)
+                        
                         Text("Mission Highlights")
                             .font(.title.bold())
                             .padding(.bottom, 5)
                         Text(mission.description)
                             .font(.body)
-                    }
-                }
-                .padding(.bottom)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(crew, id: \.role) { crew in
-                            NavigationLink {
-                                Text(crew.astronaut.description)
-                            } label: {
-                                HStack {
-                                    Image(crew.astronaut.id)
-                                        .resizable()
-                                        .frame(width: 104, height: 72)
-                                        .clipShape(Capsule())
-                                        .overlay(Capsule().strokeBorder(.white, lineWidth: 1))
-                                    VStack(alignment: .leading) {
-                                        Text(crew.astronaut.name)
-                                            .foregroundColor(.white)
-                                            .font(.headline)
-                                        Text(crew.role)
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
+                        Rectangle()
+                            .frame(height: 2)
+                            .foregroundColor(.lightBackground)
+                        VStack() {
+                            Text("Crew")
+                                .font(.title.bold())
+                                .padding(.bottom, 5)
                             
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(crew, id: \.role) { crew in
+                                NavigationLink {
+                                    Text(crew.astronaut.description)
+                                } label: {
+                                    HStack {
+                                        Image(crew.astronaut.id)
+                                            .resizable()
+                                            .frame(width: 104, height: 72)
+                                            .cornerRadius(15)
+                                        VStack(alignment: .leading) {
+                                            Text(crew.astronaut.name)
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                            Text(crew.role)
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                    .padding(.trailing)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .strokeBorder(.white.opacity(0.7), lineWidth: 1)
+                                    }
+                                    .padding(.leading)
+                                }
+                                
+                            }
                         }
                     }
                 }
             }
+            .padding(.bottom)
         }
         .navigationTitle(mission.displayName)
         .navigationBarTitleDisplayMode(.inline)
-        .padding()
         .background(.darkBackground)
     }
 }
