@@ -24,7 +24,7 @@ struct MissionViewGrid: View {
                         MissionViewDetails(mission: mission, astronauts: astronauts)
                     } label: {
                         VStack {
-                            Image(mission.image)
+                            Image(decorative: mission.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 100, height: 100)
@@ -48,6 +48,9 @@ struct MissionViewGrid: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.lightBackground)
                         )
+                        .accessibilityElement()
+                        .accessibilityLabel("\(mission.displayName)")
+                        .accessibilityHint(mission.formattedLaunchDate == "N/A" ? "No launch date" : "Launched on \(mission.formattedLaunchDate)")
                     }
                 }
             }

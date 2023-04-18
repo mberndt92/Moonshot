@@ -28,7 +28,7 @@ struct MissionViewDetails: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
-                    Image(mission.image)
+                    Image(decorative: mission.image)
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.6)
@@ -36,15 +36,21 @@ struct MissionViewDetails: View {
                     
                     Text(mission.formattedLaunchDate)
                         .font(.title2)
+                        .accessibilityLabel(mission.formattedLaunchDate == "N/A" ? "\(mission.displayName) did not launch" : "\(mission.displayName) launched on \(mission.formattedLaunchDate)")
                     
                     VStack(alignment: .leading) {
                         CustomDivider()
                         
-                        Text("Mission Highlights")
-                            .font(.title.bold())
-                            .padding(.bottom, 5)
-                        Text(mission.description)
-                            .font(.body)
+                        VStack {
+                            Text("Mission Highlights")
+                                .font(.title.bold())
+                                .padding(.bottom, 5)
+                            Text(mission.description)
+                                .font(.body)
+                        }
+                        .accessibilityElement()
+                        .accessibilityLabel("Mission Highlights")
+                        .accessibilityHint(mission.description)
                         
                         CustomDivider()
                         

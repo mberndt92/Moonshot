@@ -43,6 +43,9 @@ struct MissionViewList: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.lightBackground)
                     )
+                    .accessibilityElement()
+                    .accessibilityLabel("\(mission.displayName)")
+                    .accessibilityHint(mission.formattedLaunchDate == "N/A" ? "No launch date" : "Launched on \(mission.formattedLaunchDate)")
                 }
             }
         }

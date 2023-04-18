@@ -14,13 +14,16 @@ struct AstronautView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image(astronaut.id)
+                Image(decorative: astronaut.id)
                     .resizable()
                     .scaledToFit()
                 
                 Text(astronaut.description)
                     .padding()
             }
+            .accessibilityElement()
+            .accessibilityLabel("\(astronaut.name)")
+            .accessibilityHint("\(astronaut.description)")
         }
         .background(.darkBackground)
         .navigationTitle(astronaut.name)
